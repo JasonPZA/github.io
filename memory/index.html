@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Marketplace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0a0a0a; color: white; }
+        .neon-text { color: #00ffff; text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff; }
+        .neon-border { border-color: #00ffff; }
+        .hidden { display: none; }
+        .fade-in { animation: fadeIn 1s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans">
+    
+    <!-- Navigation -->
+    <nav class="p-5 flex justify-between items-center border-b neon-border">
+        <h1 class="text-xl font-bold neon-text">Memory Marketplace</h1>
+        <div>
+            <a href="#marketplace" class="mx-3 text-gray-300 hover:text-white">Marketplace</a>
+            <a href="#upload" class="mx-3 text-gray-300 hover:text-white">Upload Memory</a>
+            <a href="#vip" class="mx-3 text-gray-300 hover:text-white">VIP Area</a>
+            <a href="#leaderboard" class="mx-3 text-gray-300 hover:text-white">Leaderboard</a>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <header class="text-center py-20 fade-in">
+        <h2 class="text-4xl font-bold neon-text">Buy & Sell Memories</h2>
+        <p class="text-gray-400 mt-4">Experience the past. Own a memory. Shape your future.</p>
+        <a href="#marketplace" class="mt-6 inline-block px-6 py-3 text-lg border neon-border hover:bg-gray-500">Explore Market</a>
+    </header>
+    
+    <!-- Marketplace Section -->
+    <section id="marketplace" class="p-10 fade-in">
+        <h2 class="text-2xl font-bold mb-4 neon-text">Memory Marketplace</h2>
+        <div class="grid grid-cols-3 gap-4">
+            <div class="p-5 border neon-border">
+                <h3 class="text-lg font-semibold">First Love</h3>
+                <p class="text-gray-400 text-sm">Experience the rush of a first love.</p>
+                <button onclick="redirectToMemory('first-love.html')" class="mt-3 px-4 py-2 border neon-border hover:bg-gray-500">Get Memory</button>
+            </div>
+            <div class="p-5 border neon-border">
+                <h3 class="text-lg font-semibold">Skydiving Thrill</h3>
+                <p class="text-gray-400 text-sm">Feel the adrenaline of skydiving.</p>
+                <button onclick="redirectToMemory('skydiving.html')" class="mt-3 px-4 py-2 border neon-border hover:bg-gray-500">Get Memory</button>
+            </div>
+            <div class="p-5 border neon-border">
+                <h3 class="text-lg font-semibold">Deep Space Walk</h3>
+                <p class="text-gray-400 text-sm">Experience the silence of space.</p>
+                <button onclick="redirectToMemory('deep-space.html')" class="mt-3 px-4 py-2 border neon-border hover:bg-gray-500">Get Memory</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Leaderboard Section -->
+    <section id="leaderboard" class="p-10 fade-in">
+        <h2 class="text-2xl font-bold mb-4 neon-text">Top Memory Traders</h2>
+        <ul id="leaderboard-list" class="list-disc ml-6 text-gray-400">
+            <li>Loading...</li>
+        </ul>
+    </section>
+    
+    <!-- VIP Section -->
+    <section id="vip" class="p-10 fade-in">
+        <h2 class="text-2xl font-bold mb-4 neon-text">VIP Access</h2>
+        <p class="text-gray-400">Enter your asset value to access the VIP area:</p>
+        <input id="assetValue" type="number" class="p-2 bg-black border neon-border mt-2">
+        <button onclick="checkVIPAccess()" class="ml-3 px-4 py-2 border neon-border hover:bg-gray-500">Verify</button>
+        
+        <div id="vipContent" class="hidden mt-6 p-5 border neon-border">
+            <h3 class="text-xl neon-text">Exclusive Memories</h3>
+            <p class="text-gray-400">Only the elite have access to these premium experiences.</p>
+        </div>
+    </section>
+    
+    <!-- JavaScript for interactions -->
+    <script>
+        function redirectToMemory(page) {
+            window.location.href = page;
+        }
+        function checkVIPAccess() {
+            let value = document.getElementById('assetValue').value;
+            if (value >= 1000) {
+                document.getElementById('vipContent').classList.remove('hidden');
+            } else {
+                alert('Access Denied: Minimum asset value required is 1000.');
+            }
+        }
+        function loadLeaderboard() {
+            let leaderboard = [
+                { name: 'User A', trades: 120 },
+                { name: 'User B', trades: 98 },
+                { name: 'User C', trades: 75 }
+            ];
+            let list = document.getElementById('leaderboard-list');
+            list.innerHTML = '';
+            leaderboard.forEach(user => {
+                let li = document.createElement('li');
+                li.textContent = `${user.name} - ${user.trades} trades`;
+                list.appendChild(li);
+            });
+        }
+        window.onload = loadLeaderboard;
+    </script>
+    
+</body>
+</html>
